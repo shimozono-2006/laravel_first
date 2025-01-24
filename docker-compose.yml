@@ -1,0 +1,21 @@
+services:
+  buck-pc:
+  #dir作成編
+    build: ./ #本来ならbuild: ./DockerfileだけどDockerfileは省略
+    volumes:
+      - .:/app #.はInternのdirを表していて、internとdockernの/appを同期指している
+      #アプリケーション起動編
+    ports:
+      - 8000:8000 
+  mysql:
+    image: mysql
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 3000:3306
+    environment:
+      - MYSQL_DATABASE=dev
+      - MYSQL_ROOT_PASSWORD=password
+
+volumes:
+  mysql:
